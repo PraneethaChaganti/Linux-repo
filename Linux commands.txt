@@ -1,0 +1,434 @@
+1.Default login shell - echo $SHELL
+2.View current SHELL - echo $0
+3.list available shells on system - cat /etc/shells
+4.list files - ls -l
+5.Current directory - pwd
+6.Change directory - cd /var/log
+7.Display file content - cat filename.txt
+8.Switch to root - sudo -i or su -
+9.Run a single command as root - sudo dnf update
+10.show environment variables - env or printenv
+11.show specific variables - echo $HOME,echo $PATH,echo $USER
+12.setting env variable - export MYVAR="Hello"
+13.Permanent for a user - ~/.bashrc, ~/.bash_profile
+14.Reload - source ~/.bashrc
+15.add directory temporarily - export PATH:$PATH:/opt/myapp/bin
+16.Check exit status - echo $?
+17.Redirect output to a file - ls > filelist.txt
+18.Append instead of overwrite - ls >> filelist.txt
+19.Redirect errors - ls badfile 2> error.txt
+20.pipe output b/w commands - ls -l | grep ".log"
+21.View current user - whoami
+22.View logged-in users - who
+23.View process tree - ps aux
+24.Current shell process - ps -p $$
+25.permanently change default shell - chsh -s /bin/bash
+26.Create files & Directories - touch file.txt
+27. Create a directory - mkdir mydir
+28.Create nested directories - mkdir -p parent/child/grandchild
+29.Copy a file - cp file.txt backup.txt
+30.More or Rename Files - mv oldname.txt newname.txt
+mv file.txt /home/user/documents
+31.Delete a file - rm file.txt
+32.Find files by name - find /home -name "file.txt"
+33.find by type - find /var -type f
+34.find and delete - find /tmp -name "*.log" -delete
+35.search for text - grep "error" logfile.txt
+36.Recursive search - grep -r "ERROR" /var/log
+37.Changing Permissions - chmod +x file or chmod 777 file
+38.Changing owner - chown user file.txt
+39.Changing group - chgrp developers file.txt
+40.SetUID(SUID) - chmod u+s file
+41.SetGID(SGID) - chmod g+s directory
+42.Sticky Bit - chmod +t directory
+43.Default Permissions & Umask - umask 0022 file or umask 027 file
+44.View ACL Permissions - getfacl file.txt
+45.Set ACL permissions - setfacl -m u:john:rwx file.txt
+46.Remove ACL permissions - setfacl -x u:john file.txt
+47.SELinux check status - sestatus
+48.SELinux view file context - ls -Z
+49.User info is stored in - /etc/passwd
+50.Password hashes are stored in - /etc/shadow
+51.View user details - id username
+52.Create a User - sudo useradd username
+53.Create with home directory - sudo useradd -m username
+54.Specify shell - sudo useradd -s /bin/bash username
+55.Set password - sudo passwd username
+56.Change username - sudo usermod -l newname oldname
+57.Add user to supplementary group - sudo usermod -aG groupname username
+58.Lock account - sudo usermod -L username
+59.Unlock account - sudo usermod -U username
+60.Remove user - sudo userdel username
+61.Remove username and home directory - sudo userdel -r username
+62.Group info is store in - /etc/group
+63.Create a group - sudo groupadd developers
+64.Delete a group - sudo groupdel developers
+65.Add user to group - sudo usermod -aG deveopers username
+66.Check groupmemebership - groups username
+67.View UID - id username
+68.Check password settings - sudo chage -l username
+69.Set maximum password age - sudo chage -M 90 username
+70.Set minimum days b/w changes - sudo chage -m 7 username
+71.Force password change on next login - sudo chage -d 0 username
+72.System-Wide Password Policy - /etc/login.defs
+73.For PAM-based password complexity - /etc/pam.d/system-auth
+74.check service status - systemctl status httpd
+75.start a service - systemctl start httpd
+76.stop a service - systemctl stop httpd
+77.restart a service - systemctl restart httpd
+78.reload configuration without full restart - systemctl reload httpd
+79.enable service at boot - systemctl enable httpd
+80.disable a service - systemctl disable httpd
+81.check if enabled - systemctl is-enabled httpd
+82.list running services - systemctl list-units --type=service
+83.list all services - systemctl list-unit-files --type=service
+84.service unit files are stored in - /usr/lib/system/system/
+85.local overrides - /etc/system/system/
+86.view unit file - systemctl cat httpd
+87.create custom service - nano /etc/system/system/myapp.service
+88.reload systemd after changes - systemctl daemon-reload
+89.Enable and start - systemctl enable --now myapp
+90.Editing system files - systemctl edit httpd
+91.View logs for a service - journalctl -u httpd
+92.show recent logs - journalctl -u httpd -n 20
+93.follow logs live - journalctl -u httpd -f
+94.view logs since boot - journalctl -b
+95.Check current target - systemctl get-default
+96.switch to graphical - systemctl set-default graphical.target
+97.switch to text-only - systemctl set-default multi-user.tartget
+98.change immediately - systemctl isolate multi-user.tartget
+99.check failed services - systemctl --failed
+100.Analyze boot time - systemd-analyze
+101.show service startup times - systemd-analyze blame
+102.critical chain - systemd-analyze critical-chain
+103.mask a service - systemctl mask httpd
+104.unmask a service - systemctl unmask httpd
+105.ssh service is provided by - sshd
+106.Install openssh - dnf install openssh-server
+107.Allow ssh through firewall - firewall-cmd --state
+108.allow ssh permanently - firewall-cmd --permanent --add-service=ssh and firewall-cmd --reload
+109.verify ssh firewall setting - firewall-cmd --list-services
+110.connecting to other Linux machines through ssh - ssh username@server_ip
+111.ssh configuration edit file - vi /etc/ssh/sshd_config
+112.Root login permit through ssh - PermitRootLogin no
+113.Disable password authentication - PasswordAuthentication no
+114.Configure key-based authentication - ssh-keygen
+115.Copy public key to server - ssh-copy-id username@server_ip
+116.Changing ssh port allow it in selinux - semanage port -a -t ssh_port_t -p tcp 2222
+117.list interfaces - ip link show or nmcli device status
+118.show ip address - ip addr show
+119.show routing table - ip route 
+120.show DNS configuration - cat /etc/resolv.conf
+121.show networkmanager - nmcli device show
+122.configure interface using dhcp - nmcli con add type ethernet ifname ens33 con-name ens33-dhcp
+123.nmcli con modify ens33-dhcp ipv4.method auto
+124.nmcli con up ens33-dhcp
+125.Check status - nmcli con show
+126.nmcli con add type ethernet ifname ens33 con-name ens33-static
+127.static details - nmcli con modify ens33-static ipv4.addresses 192.168.1.100/24 ipv4.gateway 192.168.1.1 ipv4.dns 8.8.8.8 ipv4.method manual
+128.Activate network - nmcli con up ens33-static
+129.Modify existing connection - nmcli con modify ens33-static ipv4.dns "8.8.8.8 1.1.1.1"
+130.Restart connection - nmcli con down ens33-static
+nmcli con up ens33-static
+131.Launch interactive tool - nmtui
+132.view current hostname - hostnamectl
+133.set new hostname - hostnamectl set-hostname server1.example.com
+134.set dns via networkmanager - nmcli con modify ens33-static ipv4.dns "8.8.8.8 1.1.1.1"
+135.Prevent DHCP from overwriting DNS - nmcli con modify ens33-static ipv4.ignore-auto-dns yes
+136.check firewall status - firewall-cmd --state
+137.allow http - firewall-cmd --permanent --add-service=http
+138.test connectivity - ping 8.8.8.8 or ping server address
+139.trace route - traceroute google.com
+140.check listening ports - ss -tulnp
+141.NetworkManager stores profiles in - /etc/NetworkManager/system-connection
+142.older rhel versions used - /etc/sysconfig/network-scripts/
+143.List enabled repositories - dnf repolist
+144.list all repositories - dnf repolist --all
+145.repository files are stored in - /etc/yum.repos.d/
+146.search repo by name - dnf search nginx
+147.get detailed repo info - dnf info nginx
+148.list installed packages - dnf list installed
+149.check if package is installed - dnf list installed nginx
+150.check for available updates - dnf check-update
+151.update a specific package - dnf update nginx
+152.update all packages - dnf update 
+153.View transaction history - dnf history
+154.undo a transaction - dnf history undo <ID>
+155.Redo a transaction - dnf history redo <ID>
+156.list package groups - dnf group list
+157.Install a group - dnf group install "Development tools"
+158.Remove a group - dnf group remove "Development tools"
+159.List modules - dnf module list
+160.Enable a module stream - dnf module enable nodejs:18
+161.Install module - dnf module install nodejs:18
+162.Reset module - dnf module reset nodejs
+163.Clean metadata - dnf clean all
+164.Rebuild cache - dnf makecache
+165.disk usage of cache - du -sh /var/cache/dnf
+166.Download packages - dnf download nginx
+167.Download with dependencies - dnf download --resolve nginx
+168.View file security context - ls -Z file.txt (or) system_u:object_r:httpd_sys_content_t:s0
+169.Change context temporarily - chcon -t httpd_sys_content_t file.txt
+170.Restore default context - restorecon -v file.txt
+171.Persistently manage contexts - semanage fcontext -a -t httpd_sys_content_t "/webdata(/.*)?" restorecon -R /webdata
+172.View mounted file system - mount (or)lsblk
+173.View disk usage - df -h
+174.Temporary mount - mount -o noexec,nosuid,nodev /dev/sdb1 /mnt/secure
+175.Persistent configuration in - /etc/fstab 
+/dev/sdb1 /secure ext4 defaults,noexec,nosuid,nodev 0 0
+176.Encrypt partition - cryptsetup luksFormat /dev/sdb1
+177.Open encrypted volume - cryptsetup luksOpen /de/sdb1 secure_data
+178.Create filesystem - mkfs.xfs /dev/mapper/secure_data
+179.block a port - firewall-cmd --permanent --remove-port=8080/tcp
+180.view selinux Booleans - getsebool -a
+181.allow web server network connections - setsebool -P httpd_can_network_connect on
+182.view listening ports - ss -tulnp
+183.check active connections - ss -tunap
+184.monitor ssh logs - journalctl -u sshd
+185.search recent selinux denials - ausearch -m avc -ts recent
+186.view authentication logs - cat /var/log/secure
+187.find suid files - find / -perm -4000 -type f 2>/dev/null
+
+
+Define variables:
+
+#!/bin/bash
+NAME="Admin"
+echo "Welcome $NAME"
+
+User input:
+
+#!/bin/bash
+read -p "Enter your name: " USER
+echo "Hello $USER"
+
+Command substitution:
+
+DATE=$(date)
+echo "Today is $DATE"
+
+if Statement
+#!/bin/bash
+
+if [ -f /etc/passwd ]; then
+    echo "File exists"
+else
+    echo "File not found"
+fi
+
+For Loop
+#!/bin/bash
+
+for USER in user1 user2 user3
+do
+    echo "Processing $USER"
+done
+While Loop
+#!/bin/bash
+
+COUNT=1
+while [ $COUNT -le 5 ]
+do
+    echo "Count: $COUNT"
+    ((COUNT++))
+done
+
+Check exit code:
+
+if [ $? -ne 0 ]; then
+    echo "Command failed"
+fi
+
+Better approach:
+
+#!/bin/bash
+
+set -e  # Exit immediately if a command fails
+
+Define reusable logic:
+
+#!/bin/bash
+
+backup() {
+    cp "$1" "$1.bak"
+    echo "Backup created for $1"
+}
+
+backup /etc/hosts
+7️⃣ Positional Parameters
+
+Use arguments passed to script:
+
+#!/bin/bash
+echo "First argument: $1"
+echo "Second argument: $2"
+
+Edit cron:
+
+crontab -e
+
+Example: Run script daily at 2 AM:
+
+0 2 * * * /home/admin/backup.sh
+
+Example 1: Automated Backup Script
+#!/bin/bash
+
+BACKUP_DIR="/backup"
+DATE=$(date +%F)
+
+mkdir -p $BACKUP_DIR
+tar -czf $BACKUP_DIR/etc-$DATE.tar.gz /etc
+
+echo "Backup completed"
+
+Example 2: User Creation Automation
+#!/bin/bash
+
+for USER in user1 user2 user3
+do
+    useradd $USER
+    echo "Password123" | passwd --stdin $USER
+done
+
+188.Detailed disk info - fdisk -l
+189.partioning disk using fdisk - fdisk /dev/sdb
+190.partioning disk using parted(GPT disks) - parted /dev/sdb
+191.Create partition - mklabel gpt
+mkpart primary xfs 1MB 100%
+192.create xfs - mkfs.xfs /dev/sdb1
+193.create ext4 - mkfs.ext4 /dev/sdb1
+194.temporary mount - mkdir /data
+mount /dev/sdb1 /data
+195.Persistent Mount - vi /etc/fstab
+/dev/sdb1 /data xfs defaults 0 0
+mount -a
+196.Get UUID - blkid
+UUID=xxxx-xxxx /data xfs defaults 0 0
+
+Physical Volume -> Volume Group -> Logical Volume
+
+197.Create physical volume - pvcreate /dev/sdb1
+198.View PVs - pvs
+199.Create Volume Group - vgcreate vg_data /dev/sdb1
+200.View VGs - vgs
+201.Create Logical Volume - lvcreate -L 10G -n lv_data vg_data
+202.View LVs - lvs
+203.Create File System on LV - mkfs.xfs /dev/vg_data/lv_data
+204.Mount it - mkdir /lvdata
+mount /dev/vg_data/lv_data /lvdata
+205.Extend LV by 5GB - lvextend -L +5G /dev/vg_data/lv_data
+206.Resize filesystem - xfs_growfs /lvdata
+207.Resize filesystem ext4 - resize2fs /dev/vg_data/lv_data
+208.Reducing Logical Volumes - 
+sudo umount /lvdata
+sudo e2fsck -f /dev/vg_data/lv_data
+sudo resize2fs /dev/vg_data/lv_data 5G
+sudo lvreduce -L 5G /dev/vg_data/lv_data
+209.Create swap partition - 
+sudo mkswap /dev/sdb2
+sudo swapon /dev/sdb2
+210.check swap - swapon --show
+211.Encrypted swap with LUKs - cryptsetup luksFormat /dev/sdb2
+212.Open a encrypted device - cryptsetup luksOpen /dev/sdb2 cryptswap
+213.Create Swap on Encrypted Mapper - mkswap /dev/mapper/cryptswap
+214.Enable Swap - swapon /dev/mapper/cryptswap
+
+Automatic Encrypted Swap via /etc/crypttab
+
+cryptswap  /dev/sdb2  /dev/urandom  swap
+
+Add to /etc/fstab:
+
+/dev/mapper/cryptswap  none  swap  defaults  0 0
+
+215.Monitor Authentication Logs - cat /var/log/secure
+216.Check Failed Login Attempts - lastb
+217.Audit System (auditd) status check - systemctl status auditd
+218.search for access denials - ausearch -m avc
+219.Disable Unused Services - systemctl list-unit-files --type=service
+220.Disable service - systemctl disable service_name
+221.Stop service immediately - systemctl stop service_name
+222.Check current target - systemctl get-default
+224.multi-user (non-graphical) for servers - systemctl set-default multi-user.target
+225.RHEL boot sequence:
+
+BIOS/UEFI → GRUB2 → Kernel → initramfs → systemd → target
+
+226.View GRUB Configuration - /boot/grub2/grub.cfg
+227.Modify GRUB Settings - vi /etc/default/grub
+GRUB_TIMEOUT=5
+GRUB_CMDLINE_LINUX="quiet"
+228.Regenerate GRUB config (BIOS systems) - grub2-mkconfig -o /boot/grub2/grub.cfg
+229.UEFI systems - grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
+230.Append to kernel line - rd.break
+systemd.unit=emergency.target
+231.Check Default Target - systemctl get-default
+232.Change Default Target - systemctl set-default multi-user.target
+233.Set GUI mode - systemctl set-default graphical.target
+234.Switch immediately - systemctl isolate multi-user.target
+235.Listing all Services - systemctl list-unit-files --type=service
+236.list Running services - systemctl list-units --type=service
+237.list failed services - systemctl --failed
+238.show boot time - systemd-analyze
+239.detailed boot breakdown - systemd-analyze blame
+240.critical boot chain - systemd-analyze critical-chain
+241.view current kernel - uname -r
+241.list installed kernels - rpm -q kernel
+242.set default kernel - grub2-set-default 0
+243.verify grub - grub2-editenv list
+244.resetting root password - rd.break
+mount -o remount,rw /sysroot
+chroot /sysroot
+passwd
+touch /.autorelabel
+reboot
+254.Masking services - systemctl mask httpd
+255.unmask a service - systemctl unmask httpd
+256.Creating Custom systemd Services - vi /etc/systemd/system/myscript.service
+
+[Unit]
+Description=Custom Script
+
+[Service]
+ExecStart=/usr/local/bin/myscript.sh
+
+[Install]
+WantedBy=multi-user.target
+
+257.Reload systemd - systemctl daemon-reload
+258.Check pod version - podman --version
+259.Pull image from registry - 
+podman pull registry.access.redhat.com/ubi9/ubi
+260.list local images - podman images
+261.run interactive container - podman run -it registry.access.redhat.com/ubi9/ubi /bin/bash
+262.run detached web server - podman run -d -p 8080:80 docker.io/library/nginx
+263.run image with name - podman run -d --name webserver -p 8080:80 nginx
+264.list running containers - podman ps
+265.start container - podman start container
+266.stop container - podman stop container
+267.remove container - podman rm container
+268.remove image - podman rmi imagename
+269.check user namespace - podman info | grep rootless
+270.list Default network - podman network ls
+271.Inspect network - podman network inspect podman
+272.Create custom network - podman network create mynet
+273.Run container on custom network - podman run -d --network mynet nginx
+274.create volume - podman volume create myvolume
+275.run container with volume - podman run -d -v myvolume:/usr/share/nginx/html nginx
+276.Bind mount host directory - podman run -d -v /data:/data:Z nginx
+277.create pod - podman pod create --name mypod -p 8080:80
+278.run container inside pod - podman run -d --pod mypod nginx
+279.list pods - podman pod ps
+280.generate systemd service  - podman generate systemd --name webserver --files --new
+281.Move service file - mv container-webserver.service ~/.config/systemd/user/
+282.enable service - systemctl --user enable container-webserver.service
+283.Inspect container - podman inspect webserver
+284.view logs - podman logs webserver 
+285.exec running container - podman exec -it webserver /bin/bash
+286.check resource usage - podman stats
+287.create containerfile 
+FROM registry.access.redhat.com/ubi9/ubi
+RUN dnf install -y httpd
+CMD ["/usr/sbin/httpd","-D","FOREGROUND"]
+288.Build image - podman build -t myhttpd .
